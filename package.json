@@ -1,0 +1,27 @@
+{
+  "name": "pb",
+  "version": "0.1.0",
+  "description": "Podcast embedding library",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NarroApp/Pb.git"
+  },
+  "keywords": [
+    "podcast",
+    "embed",
+    "player"
+  ],
+  "author": "andjosh",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NarroApp/Pb/issues"
+  },
+  "homepage": "https://github.com/NarroApp/Pb#readme",
+  "devDependencies": {
+    "eslint-plugin-react": "^5.2.2"
+  }
+}
