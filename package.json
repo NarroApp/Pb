@@ -2,7 +2,7 @@
   "name": "pb",
   "version": "0.1.0",
   "description": "Podcast embedding library",
-  "main": "index.js",
+  "main": "src/main.js",
   "scripts": {
     "build": "browserify -t [ babelify  ] main.js -o bundle.js",
     "test": "jest"
