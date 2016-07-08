@@ -4,6 +4,7 @@
   "description": "Podcast embedding library",
   "main": "index.js",
   "scripts": {
+    "build": "browserify -t [ babelify  ] main.js -o bundle.js",
     "test": "jest"
   },
   "repository": {
@@ -23,5 +24,11 @@
   "homepage": "https://github.com/NarroApp/Pb#readme",
   "devDependencies": {
     "eslint-plugin-react": "^5.2.2"
+  },
+  "dependencies": {
+    "babel-preset-react": "^6.11.1",
+    "babelify": "^7.3.0",
+    "react": "^15.2.0",
+    "react-dom": "^15.2.0"
   }
 }
