@@ -4,7 +4,7 @@
   "description": "Podcast embedding library",
   "main": "bundle.js",
   "scripts": {
-    "build": "browserify -t [ babelify ] src/main.js -o bundle.js"
+    "build": "browserify -t [ uglifyify ] src/main.js -o bundle.js"
   },
   "repository": {
     "type": "git",
@@ -22,8 +22,7 @@
   },
   "homepage": "https://github.com/NarroApp/Pb#readme",
   "devDependencies": {
-    "babelify": "^7.3.0"
+    "uglifyify": "^3.0.2"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
