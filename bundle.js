@@ -8,7 +8,7 @@ function Artwork(data) {
     this.node = create('img', {
         src: data.itunes.image,
         alt: data.title,
-        className: 'pb-embed--artwork'
+        className: 'pb-embed--info-artwork'
     });
     this.components = {};
 
@@ -34,46 +34,27 @@ function Entry(data) {
     this.components.title = this.node.appendChild(create('h2', {
         className: 'pb-embed--entry-title'
     }));
+    this.node.appendChild(this.components.player.node);
     this.components.meta = this.node.appendChild(create('div', {
         className: 'pb-embed--entry-meta'
     }));
-    this.components.description = this.node.appendChild(create('p', {
+    this.components.meta.appendChild(create('span', {
+        textContent: new Date(data.pubDate).toLocaleDateString(),
+        className: 'pb-embed--entry-date'
+    }));
+    this.components.description = this.components.meta.appendChild(create('p', {
         innerHTML: data.content,
         className: 'pb-embed--entry-description'
     }));
-    this.node.appendChild(this.components.player.node);
     this.components.title.appendChild(create('a', {
         textContent: data.title,
         href: data.link,
         target: '_blank',
         className: 'pb-embed--entry-link'
     }));
-    this.components.meta.appendChild(create('span', {
-        textContent: new Date(data.pubDate).toLocaleDateString(),
-        className: 'pb-embed--entry-date'
-    }));
-    this.components.meta.appendChild(create('span', {
-        textContent: parseInt(data.enclosure.length, 10).toMMSS(),
-        className: 'pb-embed--entry-length'
-    }));
 
     return this;
 }
-
-Number.prototype.toMMSS = function () {
-    var sec_num = this;
-    var minutes = Math.floor(sec_num / 60);
-    var seconds = Math.round(sec_num - minutes * 60);
-
-    if (minutes < 10) {
-        minutes = "0" + minutes;
-    }
-    if (seconds < 10) {
-        seconds = "0" + seconds;
-    }
-    var time = minutes + ':' + seconds;
-    return time;
-};
 
 },{"../utils/create":7,"./player":4}],3:[function(require,module,exports){
 
@@ -156,7 +137,7 @@ function Player(data) {
 
 var Info = require('./components/info'),
     Entry = require('./components/entry'),
-    request = require('./utils/request');
+    request = require('./utils/jsonp');
 
 module.exports = PB;
 function PB(node, feed) {
@@ -172,16 +153,10 @@ function PB(node, feed) {
 PB.prototype.reload = function reload() {
     var parser = 'https://www.narro.co/api/v1/parser/feed?url=';
 
-    request(parser + encodeURIComponent(this.feed), function (err, resp) {
-        if (resp) {
-            resp = JSON.parse(resp);
-        }
-        if (err) {
-            this.node.textContent = 'Error loading embedded podcast:\n';
-            this.node.textContent += err;
+    request(parser + encodeURIComponent(this.feed), function (resp) {
+        if (!resp || !resp.data) {
+            this.node.textContent = 'Error loading embedded podcast';
             this.node.className += 'pb-embed-error';
-        } else if (!resp || !resp.data) {
-            console.error('No data returned for embedded podcast');
         } else {
             this.data = resp.data[0];
             this.render();
@@ -190,18 +165,21 @@ PB.prototype.reload = function reload() {
 };
 
 PB.prototype.render = function render() {
-    var entry;
+    var limit = 0,
+        entry;
 
+    limit = parseInt(this.node.dataset.limit, 10) || this.data.entries.length;
+    this.node.innerHTML = '';
     this.components.info = new Info(this.data);
     this.node.appendChild(this.components.info.node);
-    for (var i = 0; i < this.data.entries.length; i++) {
+    for (var i = 0; i < limit; i++) {
         entry = new Entry(this.data.entries[i]);
         this.components.entries.push(entry);
         this.node.appendChild(entry.node);
     }
 };
 
-},{"./components/entry":2,"./components/info":3,"./utils/request":8}],7:[function(require,module,exports){
+},{"./components/entry":2,"./components/info":3,"./utils/jsonp":8}],7:[function(require,module,exports){
 
 module.exports = function create(name, props) {
     var el = document.createElement(name);
@@ -219,32 +197,29 @@ module.exports = function create(name, props) {
 
 },{}],8:[function(require,module,exports){
 
-module.exports = function request(url, cb, method, post, contenttype) {
-    var requestTimeout, xhr;
+module.exports = function jsonp(url, cb) {
+    window.pbCallbacks = window.pbCallbacks || { cntr: 0 };
+    asyncRequest(url, url, function (id, data) {
+        cb(data);
+    });
 
-    try {
-        xhr = new XMLHttpRequest();
-    } catch (e) {
-        try {
-            xhr = new ActiveXObject("Msxml2.XMLHTTP");
-        } catch (error) {
-            cb(new Error('Request not supported'));
-        }
+    function asyncRequest(url, id, fn) {
+        var name = "fn" + window.pbCallbacks.cntr++;
+
+        window.pbCallbacks[name] = function () {
+            delete window.pbCallbacks[name];
+            var args = [id, arguments[0]];
+            fn.apply(this, args);
+        };
+        doJSONP(url, "pbCallbacks." + name);
     }
-    requestTimeout = setTimeout(function () {
-        xhr.abort();cb(new Error("request: aborted by a timeout"), "", xhr);
-    }, 10000);
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState != 4) return;
-        clearTimeout(requestTimeout);
-        cb(xhr.status != 200 ? new Error("request: server respnse status is " + xhr.status) : false, xhr.responseText, xhr);
-    };
-    xhr.open(method ? method.toUpperCase() : "GET", url, true);
-    if (!post) {
-        xhr.send();
-    } else {
-        xhr.setRequestHeader('Content-type', contenttype ? contenttype : 'application/x-www-form-urlencoded');
-        xhr.send(post);
+
+    function doJSONP(url, callbackFuncName, cbName) {
+        var fullUrl = url + "&" + (cbName || "callback") + "=" + callbackFuncName,
+            script = document.createElement('script');
+
+        script.src = fullUrl;
+        document.body.appendChild(script);
     }
 };
 
