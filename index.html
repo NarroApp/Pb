@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <title>Pb, podcast embedding library by NarroApp on Github</title>
+        <link href="./example.css" rel="stylesheet" />
+        <link href="https://gist.githubusercontent.com/andyferra/2554919/raw/10ce87fe71b23216e3075d5648b8b9e56f7758e1/github.css" rel="stylesheet" />
+    </head>
+    <body>
+        <article class="markdown-body entry-content" itemprop="text">
+        <h1><a href="https://github.com/NarroApp/Pb">Pb</a></h1>
+
+        <p>This is a library with 0 dependencies that allows you to embed a podcast in your web page.</p>
+
+        <h2><a id="user-content-features" class="anchor" href="#features" aria-hidden="true"></a>Features</h2>
+
+        <ul>
+            <li>Provide a podcast URL, see a podcast rendered</li>
+            <li>Total library size is <code>~4.5kb</code></li>
+            <li>Optionally provide a limit to the number of episodes displayed</li>
+            <li>Each episode has its own audio player</li>
+        </ul>
+
+        <h2><a id="user-content-usage" class="anchor" href="#usage" aria-hidden="true"></a>Usage</h2>
+
+        <ol>
+            <li>Create an element on your page with the class <code>pb-embed</code> and attribute <code>data-feed="&lt;podcast-url-here&gt;"</code>.</li>
+            <li>Include the <code>bundle.js</code> either in your own compiled js or as a <code>script</code> tag before the <code>body</code> closing tag.</li>
+            <li>Optionally, provide your own styling of the embed (see <code>./example/example.css</code>).</li>
+            <li>Optionally, provide an attribute of <code>data-limit="&lt;some number&gt;"</code> to limit the number of episodes displayed.</li>
+        </ol>
+
+        <h3><a id="user-content-example" class="anchor" href="#example" aria-hidden="true"></a>Example</h3>
+        </article>
+        <div class="pb-embed" data-feed="http://on.narro.co/josh" data-limit="5">
+        </div>
+        <script src="https://raw.githubusercontent.com/NarroApp/Pb/master/bundle.js"></script>
+    </body>
+</html>
