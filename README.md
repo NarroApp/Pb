@@ -21,4 +21,4 @@ See [https://github.com/NarroApp/Pb/tree/master/example](https://github.com/Narr
 </div>
 ~~~
 
-Working usage: 
+Working usage: [https://narroapp.github.io/Pb/](https://narroapp.github.io/Pb/)
