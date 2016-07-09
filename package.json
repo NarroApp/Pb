@@ -5,7 +5,7 @@
   "main": "src/main.js",
   "scripts": {
     "build": "browserify -t [ babelify ] src/main.js -o bundle.js",
-    "test": "jest"
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
