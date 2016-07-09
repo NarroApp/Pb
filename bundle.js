@@ -3,9 +3,9 @@ function Artwork(e){return this.node=create("img",{src:e.itunes.image,alt:e.titl
 
 },{"../utils/create":7}],2:[function(require,module,exports){
 function Entry(e){return this.node=create("div",{className:"pb-embed--entry",dataset:{guid:e.guid}}),this.components={},this.components.player=new Player(e),this.components.title=this.node.appendChild(create("h3",{className:"pb-embed--entry-title"})),this.node.appendChild(this.components.player.node),this.components.meta=this.node.appendChild(create("div",{className:"pb-embed--entry-meta"})),this.components.meta.appendChild(create("span",{textContent:new Date(e.pubDate).toLocaleDateString(),className:"pb-embed--entry-date"})),this.components.description=this.components.meta.appendChild(create("p",{innerHTML:e.content,className:"pb-embed--entry-description"})),this.components.title.appendChild(create("a",{textContent:e.title,href:e.link,target:"_blank",className:"pb-embed--entry-link"})),this}var create=require("../utils/create"),Player=require("./player");module.exports=Entry;
+
 },{"../utils/create":7,"./player":4}],3:[function(require,module,exports){
 function Info(e){return this.node=create("div",{className:"pb-embed--info"}),this.components={},this.components.artwork=new Artwork(e),this.node.appendChild(this.components.artwork.node),this.components.title=this.node.appendChild(create("h2",{textContent:e.title,className:"pb-embed--info-title"})),this.components.description=this.node.appendChild(create("p",{textContent:e.description,className:"pb-embed--info-description"})),this.components.subscribe=this.node.appendChild(create("a",{textContent:"Subscribe",href:e.link,target:"_blank",className:"pb-embed--info-subscribe"})),this}var create=require("../utils/create"),Artwork=require("./artwork");module.exports=Info;
-
 },{"../utils/create":7,"./artwork":1}],4:[function(require,module,exports){
 function Player(e){return this.node=create("audio",{src:e.enclosure.url,className:"pb-embed--entry-player",controls:!0}),this.components={},this}var create=require("../utils/create");module.exports=Player;
 
