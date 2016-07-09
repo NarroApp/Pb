@@ -348,6 +348,9 @@ span.float-right > span {
 
 
 
+body {
+    max-width: 30rem;
+}
 .pb-embed {
         margin: 0 auto;
             max-width: 30rem;
