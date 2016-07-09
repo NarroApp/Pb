@@ -1,0 +1,18 @@
+.pb-embed {
+    max-width: 30rem;
+    font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica, helvetica neue, ubuntu, roboto, noto, segoe ui, arial, sans-serif;
+}
+.pb-embed--info-artwork {
+    max-width: 100%;
+}
+.pb-embed--entry-player {
+    width: 100%;
+}
+.pb-embed--entry-meta {
+    margin-top: 1rem;
+}
+.pb-embed--entry-description {
+    height: 5rem;
+    overflow: scroll;
+    font-size: 0.9rem;
+}
