@@ -2,10 +2,9 @@
   "name": "pb",
   "version": "0.1.0",
   "description": "Podcast embedding library",
-  "main": "src/main.js",
+  "main": "bundle.js",
   "scripts": {
-    "build": "browserify -t [ babelify ] src/main.js -o bundle.js",
-    "prepublish": "npm run build"
+    "build": "browserify -t [ babelify ] src/main.js -o bundle.js"
   },
   "repository": {
     "type": "git",
@@ -23,8 +22,8 @@
   },
   "homepage": "https://github.com/NarroApp/Pb#readme",
   "devDependencies": {
+    "babelify": "^7.3.0"
   },
   "dependencies": {
-    "babelify": "^7.3.0"
   }
 }
