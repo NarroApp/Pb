@@ -13,7 +13,7 @@ function Entry(data) {
     this.components = {};
 
     this.components.player = new Player(data);
-    this.components.title = this.node.appendChild(create('h2', {
+    this.components.title = this.node.appendChild(create('h3', {
         className:      'pb-embed--entry-title'
     }));
     this.node.appendChild(this.components.player.node);

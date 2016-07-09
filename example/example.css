@@ -1,6 +1,10 @@
 .pb-embed {
+    margin: 0 auto;
     max-width: 30rem;
     font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica, helvetica neue, ubuntu, roboto, noto, segoe ui, arial, sans-serif;
+}
+.pb-embed a {
+    text-decoration: none;
 }
 .pb-embed--info-artwork {
     max-width: 100%;
@@ -10,9 +14,9 @@
 }
 .pb-embed--entry-meta {
     margin-top: 1rem;
+    font-size: 0.9rem;
 }
 .pb-embed--entry-description {
     height: 5rem;
     overflow: scroll;
-    font-size: 0.9rem;
 }
