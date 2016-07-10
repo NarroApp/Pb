@@ -13,6 +13,23 @@ This is a library with 0 dependencies that allows you to embed a podcast in your
 3. Optionally, provide your own styling of the embed (see `./example/example.css`).
 4. Optionally, provide an attribute of `data-limit="<some number>"` to limit the number of episodes displayed.
 
+## Methods
+~~~js
+// Initialize all nodes with class 'pb-embed' on the page
+pb.init();
+
+// Initialize an embedded feed inside a given DOM node
+var node = document.querySelector('#myId');
+var embed = pb.createEmbed(node);
+
+// Initialize an embedded feed inside a given DOM node, with a feed URL
+var feed = 'http://mypodcast.com/feed.xml';
+embed = pb.createEmbed(node, feed);
+
+// Reload a given feed/embed
+embed.reload();
+~~~
+
 ### Example
 See [https://github.com/NarroApp/Pb/tree/master/example](https://github.com/NarroApp/Pb/tree/master/example)
 
