@@ -5,6 +5,14 @@ var Info        = require('./components/info'),
     ;
 
 module.exports = PB;
+/**
+ * Podcast embed, holding data and nodes
+ *
+ * @access public
+ * @param {object} node DOM node in which to render
+ * @param {string} feed URL of podcast
+ * @return {object} PB instance
+ */
 function PB(node, feed) {
     this.node = node;
     this.feed = feed;
@@ -15,6 +23,11 @@ function PB(node, feed) {
     return this;
 }
 
+/**
+ * Reload a given feed and render
+ *
+ * @access public
+ */
 PB.prototype.reload = function reload() {
     var parser = 'https://www.narro.co/api/v1/parser/feed?url=';
 
@@ -29,6 +42,11 @@ PB.prototype.reload = function reload() {
     }.bind(this));
 };
 
+/**
+ * Render a feed with present data
+ *
+ * @access public
+ */
 PB.prototype.render = function render() {
     var limit = 0,
         entry;

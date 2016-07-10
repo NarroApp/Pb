@@ -8,6 +8,11 @@
     };
     pbInit();
 
+    /**
+     * Initialize all available podcast embeds on page
+     *
+     * @access public
+     */
     function pbInit() {
         var embeds = [],
             selector = '.pb-embed',
@@ -19,6 +24,14 @@
         }
     }
 
+    /**
+     * Create an embed within the node
+     *
+     * @access public
+     * @param {object} node DOM node
+     * @param {string} feed podcast URL (optional)
+     * @return {object} PB instance
+     */
     function createEmbed(node, feed) {
         feed = feed || node.dataset.feed;
         return new PB(node, feed);

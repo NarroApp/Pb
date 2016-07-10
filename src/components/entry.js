@@ -3,6 +3,13 @@ var create      = require('../utils/create'),
     Player      = require('./player');
 
 module.exports = Entry;
+/**
+ * Render a pocast entry
+ *
+ * @access public
+ * @param {object} data
+ * @return {object} Entry instance
+ */
 function Entry(data) {
     this.node = create('div', {
         className:      'pb-embed--entry',

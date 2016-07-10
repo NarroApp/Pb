@@ -4,6 +4,13 @@ var create      = require('../utils/create'),
 
 module.exports = Info;
 
+/**
+ * Render podcast top-level information
+ *
+ * @access public
+ * @param {object} data
+ * @return {object} Info instance
+ */
 function Info(data) {
     this.node = create('div', {
         className:      'pb-embed--info'
