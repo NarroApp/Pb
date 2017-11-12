@@ -52,6 +52,7 @@ PB.prototype.render = function render() {
         entry;
 
     limit = parseInt(this.node.dataset.limit, 10) || this.data.entries.length;
+    limit = Math.min(limit, this.data.entries.length);
     this.node.innerHTML = '';
     this.components.info = new Info(this.data);
     this.node.appendChild(this.components.info.node);
