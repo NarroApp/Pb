@@ -1,11 +1,13 @@
 # Pb
-This is a library with 0 dependencies that allows you to embed a podcast in your web page.
+This is a library that allows you to embed a podcast in your web page.
 
 ## Features
 - Provide a podcast URL, see a podcast rendered
 - Total library size is `~4.5kb`
 - Optionally provide a limit to the number of episodes displayed
 - Each episode has its own audio player
+
+__Note:__ To parse the RSS/podcast/XML feed into usable JSON, the podcast is loaded through [Narro](https://www.narro.co) (using a simple pass of the [rss-parser](https://github.com/rbren/rss-parser#readme) library). This avoids bloating the client library with an RSS parser.
 
 ## Usage
 1. Create an element on your page with the class `pb-embed` and attribute `data-feed="<podcast-url-here>"`.
